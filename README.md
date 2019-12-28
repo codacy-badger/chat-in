@@ -1,2 +1,2 @@
 # chat-in
-android chatting application (on progresss)
+android chatting application (mudah mudahan kelar)

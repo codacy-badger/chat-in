@@ -1,4 +1,4 @@
-package com.example.chatin
+package com.viaann.chatin
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

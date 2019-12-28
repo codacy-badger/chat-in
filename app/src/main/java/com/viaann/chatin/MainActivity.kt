@@ -1,4 +1,4 @@
-package com.example.chatin
+package com.viaann.chatin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.chatin
+package com.viaann.chatin
 
 import org.junit.Test
 

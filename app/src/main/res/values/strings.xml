@@ -17,4 +17,7 @@
     <string name="is_simply_dummy_text_of_the_printing_and_typesetting_industry_lorem_ipsum_has_been_the_industry_s_standard_dummy">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy</string>
     <string name="contact">Contact</string>
     <string name="active">active.</string>
+    <string name="setting">Settings</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="account_setting">Account Setting</string>
 </resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "379400075131",
+    "firebase_url": "https://chat-in-e27c6.firebaseio.com",
+    "project_id": "chat-in-e27c6",
+    "storage_bucket": "chat-in-e27c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379400075131:android:18e28b20ca3a0c28b6efde",
+        "android_client_info": {
+          "package_name": "com.viaann.chatin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379400075131-kcp27e0m3ihr5h0r5ufqu4i1g1967jlq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoIkF7ET37uHRCq35mBzgJz8pwo3oNmJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379400075131-kcp27e0m3ihr5h0r5ufqu4i1g1967jlq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

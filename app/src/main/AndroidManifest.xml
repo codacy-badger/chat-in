@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.viaann.chatin.LoginActivity"></activity>
-        <activity android:name="com.viaann.chatin.RegisterActivity" />
+        <activity android:name="com.viaann.chatin.activity.LoginActivity"></activity>
+        <activity android:name="com.viaann.chatin.activity.RegisterActivity" />
         <activity
-            android:name="com.viaann.chatin.MainActivity"
-            android:theme="@style/AppThemeNoActionBar">
+            android:name="com.viaann.chatin.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

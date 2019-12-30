@@ -15,13 +15,21 @@
       },
       "oauth_client": [
         {
+          "client_id": "379400075131-s38bmat1rqs2gb8teinvjrlrrnavafm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.viaann.chatin",
+            "certificate_hash": "53166218ee2658afb6a9c9a0c08ff783706f8091"
+          }
+        },
+        {
           "client_id": "379400075131-kcp27e0m3ihr5h0r5ufqu4i1g1967jlq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBoIkF7ET37uHRCq35mBzgJz8pwo3oNmJs"
+          "current_key": "YOUR API KEY"
         }
       ],
       "services": {

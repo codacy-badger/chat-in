@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editTextEmail"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,30 +33,12 @@
         android:autofillHints="@string/email"
         android:background="@drawable/border"
         android:ems="10"
-        android:hint="@string/name"
-        android:inputType="text"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:textColor="#D0D3D4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/email"
-        android:textColor="#D0D3D4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        android:autofillHints="@string/email"/>
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -74,10 +56,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        android:autofillHints="@string/email"/>
+
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/confirm_password"
+        android:textColor="#D0D3D4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         android:autofillHints="@string/password"/>
 
     <Button
-        android:id="@+id/buttonSignin"
+        android:id="@+id/buttonSignup"
         android:layout_width="94dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -88,7 +88,7 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@id/editTextConfirmPassword" />
 
     <TextView
         android:id="@+id/tvSignin"

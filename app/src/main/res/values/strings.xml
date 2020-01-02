@@ -20,4 +20,5 @@
     <string name="setting">Settings</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="account_setting">Account Setting</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

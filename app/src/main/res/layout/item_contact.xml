@@ -16,7 +16,7 @@
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/msg_demo"
+        android:src="@drawable/profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:text="@string/tony_strak"
+        android:text="@string/username"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"

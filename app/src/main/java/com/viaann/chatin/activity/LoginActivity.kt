@@ -32,8 +32,6 @@ class LoginActivity : AppCompatActivity()
                     if (it.isSuccessful) {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
-                    } else {
-
                     }
                 }
 

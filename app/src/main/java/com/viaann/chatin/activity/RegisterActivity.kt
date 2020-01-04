@@ -35,9 +35,9 @@ class RegisterActivity : AppCompatActivity() {
                         if (it.isSuccessful) {
                             Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
                             // make all edit text is null after the register is success
-                            email.text = null
-                            password.text = null
-                            confirmPassword.text = null
+                            email.text.clear()
+                            password.text.clear()
+                            confirmPassword.text.clear()
                         } else {
                             Log.d("RegisterActivity", it.exception.toString())
                             Toast.makeText(this, "Register Fail", Toast.LENGTH_SHORT).show()

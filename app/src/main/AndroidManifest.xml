@@ -13,38 +13,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activity.ChangeActivity.ChangeIdActivity"
+        <activity android:name=".SlideFirstLogin.SlideActivity"></activity>
+        <activity android:name=".SlideFirstLogin.AddUsernameFragment" />
+        <activity android:name=".activity.OldPasswordActivity" />
+        <activity android:name=".activity.ChangeActivity.ChangeEmailActivity" />
+        <activity
+            android:name=".activity.ChangeActivity.ChangeIdActivity"
             android:theme="@style/AppThemeActionBar" />
-
-        <activity android:name=".activity.ChangeActivity.ChangeStatusActivity"
+        <activity
+            android:name=".activity.ChangeActivity.ChangeStatusActivity"
             android:theme="@style/AppThemeActionBar" />
-
-        <activity android:name=".activity.ChangeActivity.ChangeNameActivity"
+        <activity
+            android:name=".activity.ChangeActivity.ChangeNameActivity"
             android:theme="@style/AppThemeActionBar" />
-
         <activity
             android:name=".activity.AccountSettingActivity"
             android:theme="@style/AppThemeActionBar" />
-
         <activity
             android:name=".activity.EditProfileActivity"
             android:theme="@style/AppThemeActionBar" />
-
         <activity
             android:name=".activity.NewContactActivity"
             android:theme="@style/AppThemeActionBar" />
-
         <activity
             android:name=".activity.NewMessageActivity"
             android:theme="@style/AppThemeActionBar" />
-
         <activity android:name=".activity.ChatRoomActivity" />
-
         <activity android:name=".activity.LoginActivity" />
-
         <activity android:name=".activity.RegisterActivity" />
-
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
@@ -17,20 +20,31 @@ import com.viaann.chatin.R
 import com.viaann.chatin.activity.ChangeActivity.ChangeIdActivity
 import com.viaann.chatin.activity.ChangeActivity.ChangeNameActivity
 import com.viaann.chatin.activity.ChangeActivity.ChangeStatusActivity
+import com.viaann.chatin.model.User
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 import java.util.*
+import javax.microedition.khronos.opengles.GL
 import kotlin.collections.HashMap
 
 class EditProfileActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_CODE_PICK_IMAGE = 1
+        const val KEY_CHANGE_NAME = "CHANGE_NAME"
+        const val KEY_CHANGE_STATUS = "CHANGE_STATUS"
+        const val KEY_CHANGE_ID = "CHANGE_ID"
     }
 
     private var firebaseStorage = FirebaseStorage.getInstance()
     private var storageRefrence = firebaseStorage.reference
     private var filePath: Uri? = null
+    private val auth = FirebaseAuth.getInstance()
+    private val user = User()
+    private val  getChild = FirebaseDatabase.getInstance()
+        .getReference("users")
+        .child(user.idAccount!!) // error nih bangsatt !!
+        .child("profile")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,21 +53,67 @@ class EditProfileActivity : AppCompatActivity() {
         supportActionBar?.title = "Edit Profile"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        tvEditDisplayName.setOnClickListener {
-            val intent = Intent(this, ChangeNameActivity::class.java)
-            // will pass the saved display name
-            startActivity(intent)
+
+        val postListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val getUsername = dataSnapshot.child("username").getValue(String::class.java)
+                val getStatus =  dataSnapshot.child("status").getValue(String::class.java)
+                val getId = dataSnapshot.child("idAccount").getValue(String::class.java)
+                val getImage = dataSnapshot.child("imageUrl").getValue(String::class.java)
+                val getEmail = dataSnapshot.child("email").getValue(String::class.java)
+
+                // store child value to data class
+                val user = User()
+                    with (user) {
+                        idAccount = getId
+                        username = getUsername
+                        email = getEmail
+                        status = getStatus
+                        imageUrl = getImage
+                    }
+
+                tvEditDisplayName.text = user.idAccount
+                tvEditStatus.text = getStatus
+                tvChangeId.text = getId
+
+
+                Glide.with(applicationContext)
+                    .load(getImage)
+                    .fitCenter()
+                    .into(changeImg)
+            }
+
         }
+
+
+
+        getChild.addListenerForSingleValueEvent(postListener)
+
+
 
         tvEditStatus.setOnClickListener {
             val intent = Intent(this, ChangeStatusActivity::class.java)
-            // will pass the saved status
+            // pass the child value to edit text in change activity
+            if (tvEditStatus.text.toString() != "not yet filled") {
+                intent.putExtra(ChangeStatusActivity.KEY_CHANGE_STATUS, tvEditStatus.text.toString())
+            } else {
+                intent.putExtra(ChangeStatusActivity.KEY_CHANGE_STATUS, "")
+            }
             startActivity(intent)
         }
 
         tvChangeId.setOnClickListener {
             val intent = Intent(this, ChangeIdActivity::class.java)
-            // will pass the saved id account
+            // pass the child value to edit text in change activity
+            if (tvChangeId.text.toString() != "not yet filled") {
+                intent.putExtra(ChangeIdActivity.KEY_CHANGE_ID, tvChangeId.text.toString())
+            } else {
+                intent.putExtra(ChangeIdActivity.KEY_CHANGE_ID, "")
+            }
             startActivity(intent)
         }
 
@@ -65,9 +125,6 @@ class EditProfileActivity : AppCompatActivity() {
                 REQUEST_CODE_PICK_IMAGE)
         }
 
-        btnSaveChange.setOnClickListener {
-            uploadImage()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -75,6 +132,7 @@ class EditProfileActivity : AppCompatActivity() {
             filePath = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
             changeImg.setImageBitmap(bitmap)
+            uploadImage()
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
@@ -82,10 +140,10 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         if (filePath != null) {
-            val ref = storageRefrence.child("uploads/" + UUID.randomUUID().toString())
+            val ref = storageRefrence.child("${auth.currentUser?.email}/" + UUID.randomUUID().toString())
             val uploadTask = ref.putFile(filePath!!)
 
-            val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> {
+            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> {
                 if (!it.isSuccessful) {
                     it.exception?.let {
                         throw  it
@@ -95,41 +153,19 @@ class EditProfileActivity : AppCompatActivity() {
             }).addOnCompleteListener {
                 if (it.isSuccessful) {
                     val downloadUrl = it.result
-                    addUploadRecordToDb(downloadUrl.toString())
+                    //addUploadRecordToDb(downloadUrl.toString())
                 }
             }
         }
     }
 
-    private fun addUploadRecordToDb(uri: String) {
-        val db = FirebaseFirestore.getInstance()
-        val data = HashMap<String, Any>()
-        data["imageUrl"] = uri
-
-        db.collection("posts")
-            .add(data)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Saved to DB", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Fail Saved to DB", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun updateUsername() {
-
-    }
-
-    private fun updateStatus() {
-
-    }
-
-    private fun updateIdAccount() {
-
-    }
+//    private fun addUploadRecordToDb(uri: String) {
+//        getChild.child("imageUrl").setValue(uri)
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
 }

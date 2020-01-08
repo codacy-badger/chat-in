@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -32,12 +33,18 @@ class LoginActivity : AppCompatActivity()
                     if (it.isSuccessful) {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
                 }
 
                 .addOnFailureListener {
                     Log.d("Login Activity", it.message!!)
-                    Toast.makeText(this, "Email/Password incorrect", Toast.LENGTH_SHORT).show()
+                    val alert = AlertDialog.Builder(this, R.style.MyDialogTheme)
+
+                    alert.setMessage("Email/Password incorrect")
+                    alert.setPositiveButton("OK"){alert, which ->
+                    }
+                    alert.show()
 
                 }
         }

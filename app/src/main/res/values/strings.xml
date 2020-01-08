@@ -31,4 +31,21 @@
     <string name="change_password">Change Password</string>
     <string name="delete_account">Delete Account</string>
     <string name="save">Save Change</string>
+    <string name="blank">not yet filled</string>
+    <string name="add_your_username">Add Your Username</string>
+    <string name="please_add_your_username_so_your_friends_can_find_out_who_you_are">please add your username so your friends can find out who you are</string>
+    <string name="add_your_username_here">Add your username here</string>
+    <string name="submit">Submit</string>
+    <string name="add_your_status_so_your_friends_can_know_what_are_you_doing_now">add your status so your friends can know what are you doing now</string>
+    <string name="are_you_busy">Are you busy?</string>
+    <string name="let_your_friends_see_your_beauty_face_by_add_your_picture">let your friends see your beauty face by add your picture</string>
+    <string name="how_my_friend_can_add_my_contact">How my friend can add my contact?</string>
+    <string name="go_add_your_account_id_please">GO ADD YOUR ACCOUNT ID!!, please?</string>
+    <string name="where_is_your_face">Where is your face?</string>
+    <string name="welcome_to_chat_in">Welcome to Chat\'in</string>
+    <string name="verification_your_account_in_your_account_email">Verification your account in your account email</string>
+    <string name="send_verification">Send verification</string>
+    <string name="enter_your_account_id">enter your account id</string>
+    <string name="enter_your_username">enter your username</string>
+    <string name="enter_your_status">enter your status</string>
 </resources>

@@ -4,47 +4,67 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.viaann.chatin.fragment.ContactFragment
 import com.viaann.chatin.fragment.MessageFragment
 import com.viaann.chatin.R
+import com.viaann.chatin.SlideFirstLogin.SlideActivity
 import com.viaann.chatin.fragment.SettingFragment
+import com.viaann.chatin.model.User
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
 
     private val auth = FirebaseAuth.getInstance()
+    private val database = FirebaseDatabase.getInstance()
+    private val uid = "${auth.currentUser?.uid}"
+    private val myRef = database.getReference("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         if (auth.currentUser == null) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-        } else if (auth.currentUser != null){
+        } else if (auth.currentUser != null) {
 
             if (!auth.currentUser!!.isEmailVerified) {
-                // send email verification
-                auth.currentUser!!.sendEmailVerification()
-                // signout account
-                auth.signOut()
-                // move to login activity
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                Toast.makeText(this, "unverified account, please verified your account on email", Toast.LENGTH_LONG).show()
-            } else {
 
+            } else {
+                return
             }
         }
-//        val local = LocalDateTime.now()
-//        val timeNow: String = local.format(DateTimeFormatter.ofPattern("HH:mm"))
-//        val database = FirebaseDatabase.getInstance()
-//        val myRef = database.getReference("message")
-//        val userId = myRef.push().key.toString()
-//        val user = Chat("vian", timeNow ,"aa", "aa")
-//        myRef.child(userId).setValue(user)
 
+        val postListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented")
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val getIdAccount = dataSnapshot.child("idAccount").getValue(User::class.java)
+                if (dataSnapshot.hasChild(uid)) {
+                    return
+                } else if  (!dataSnapshot.hasChild(uid) && auth.currentUser != null)  {
+                    // add new child field and value in real time database
+
+                } else {
+                    return
+                }
+            }
+        }
+        myRef.addListenerForSingleValueEvent(postListener)
+
+        //add fragment to bottom navigation view
         bottom_navigation.setOnNavigationItemSelectedListener {
             item -> when (item.itemId) {
                 R.id.contact -> {

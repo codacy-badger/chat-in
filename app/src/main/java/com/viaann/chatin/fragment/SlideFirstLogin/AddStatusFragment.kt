@@ -1,4 +1,4 @@
-package com.viaann.chatin.SlideFirstLogin
+package com.viaann.chatin.fragment.SlideFirstLogin
 
 
 import android.content.Intent
@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener
 
 import com.viaann.chatin.R
 import com.viaann.chatin.activity.EditProfileActivity
-import kotlinx.android.synthetic.main.activity_change_status.*
+import kotlinx.android.synthetic.main.fragment_add_id.*
 import kotlinx.android.synthetic.main.fragment_add_status.*
 
 /**
@@ -23,10 +23,11 @@ import kotlinx.android.synthetic.main.fragment_add_status.*
  */
 class AddStatusFragment : Fragment() {
 
-    companion object {
-        lateinit var getIdAccount: String
-    }
 
+    val getChild = FirebaseDatabase.getInstance()
+        .getReference("users")
+        .child("profile")
+        .child(FirebaseAuth.getInstance().currentUser?.uid!!)
 
 
     override fun onCreateView(
@@ -40,27 +41,9 @@ class AddStatusFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val postListener = object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                getIdAccount = p0.child("idAccount").getValue(String::class.java)!!
-            }
-
+        buttonAddStatus.setOnClickListener {
+            getChild.child("status").setValue(addStatus.text.toString())
         }
 
-        val getChild = FirebaseDatabase.getInstance()
-            .getReference("users")
-            .child(AddUsernameFragment.getIdAccount)
-            .child("profile")
-
-        getChild.addListenerForSingleValueEvent(postListener)
-
-        getChild.child("status").setValue(addStatus.text.toString())
-        val intent = Intent(context, EditProfileActivity::class.java)
-        startActivity(intent)
     }
 }

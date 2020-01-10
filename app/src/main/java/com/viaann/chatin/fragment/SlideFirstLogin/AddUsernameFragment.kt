@@ -1,4 +1,4 @@
-package com.viaann.chatin.SlideFirstLogin
+package com.viaann.chatin.fragment.SlideFirstLogin
 
 
 import android.content.Intent
@@ -16,7 +16,6 @@ import com.google.firebase.database.ValueEventListener
 
 import com.viaann.chatin.R
 import com.viaann.chatin.activity.EditProfileActivity
-import kotlinx.android.synthetic.main.activity_display_name.*
 import kotlinx.android.synthetic.main.fragment_add_username.*
 
 /**
@@ -24,14 +23,11 @@ import kotlinx.android.synthetic.main.fragment_add_username.*
  */
 class AddUsernameFragment : Fragment() {
 
-    companion object {
-        lateinit var getIdAccount: String
-    }
-
     val getChild = FirebaseDatabase.getInstance()
         .getReference("users")
-        .child(getIdAccount)
         .child("profile")
+        .child(FirebaseAuth.getInstance().currentUser?.uid!!)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,33 +37,25 @@ class AddUsernameFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_add_username, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val postListener = object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        buttonAddUsername.setOnClickListener {
+            if (addUsername.text.toString() == "") {
+                val alert = AlertDialog.Builder(context!!, R.style.MyDialogTheme)
+                alert.setMessage("Username must be filled")
+                alert.setPositiveButton("OK"){alert, which -> }
+                alert.show()
+            } else {
+                getChild.child("username").setValue(addUsername.text.toString())
+                val alert = AlertDialog.Builder(context!!, R.style.MyDialogTheme)
+                alert.setMessage("Success")
+                alert.setPositiveButton("OK"){alert, which -> }
+                alert.show()
             }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                getIdAccount = p0.child("idAccount").getValue(String::class.java)!!
-            }
-
-        }
-        getChild.addListenerForSingleValueEvent(postListener)
-
-        if (addUsername.text.toString() == "") {
-            val alert = AlertDialog.Builder(context!!, R.style.MyDialogTheme)
-
-            alert.setMessage("Username must be filled")
-            alert.setPositiveButton("OK"){alert, which -> }
-            alert.show()
-        } else {
-            getChild.child("username").setValue(addUsername.text.toString())
-            val intent = Intent(context, EditProfileActivity::class.java)
-            startActivity(intent)
         }
     }
+    }
 
-}
+

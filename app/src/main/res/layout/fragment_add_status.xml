@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SlideFirstLogin.AddUsernameFragment">
+    tools:context=".fragment.SlideFirstLogin.AddUsernameFragment">
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="204dp"
+        android:layout_width="0dp"
         android:layout_height="41dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="175dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/are_you_busy"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
@@ -44,6 +44,7 @@
         android:background="@drawable/bg_slide"
         android:ems="10"
         android:hint="@string/enter_your_status"
+        android:textColor="@android:color/white"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

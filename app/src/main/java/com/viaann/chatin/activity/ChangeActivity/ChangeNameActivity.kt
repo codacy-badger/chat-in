@@ -19,8 +19,8 @@ class ChangeNameActivity : AppCompatActivity() {
 
     private val getChild = FirebaseDatabase.getInstance()
         .getReference("users")
-        .child(FirebaseAuth.getInstance().currentUser!!.uid)
         .child("profile")
+        .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

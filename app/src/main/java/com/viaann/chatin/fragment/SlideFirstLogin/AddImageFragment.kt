@@ -1,4 +1,4 @@
-package com.viaann.chatin.SlideFirstLogin
+package com.viaann.chatin.fragment.SlideFirstLogin
 
 
 import android.content.Intent
@@ -19,6 +19,7 @@ import com.google.firebase.storage.UploadTask
 import com.viaann.chatin.R
 import com.viaann.chatin.activity.EditProfileActivity
 import kotlinx.android.synthetic.main.activity_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_add_image.*
 import java.util.*
 
 /**
@@ -28,13 +29,13 @@ class AddImageFragment : Fragment() {
 
     private var firebaseStorage = FirebaseStorage.getInstance()
     private var storageRefrence = firebaseStorage.reference
-
     private var filePath: Uri? = null
     private val auth = FirebaseAuth.getInstance()
+
     private val getChild = FirebaseDatabase.getInstance()
         .getReference("users")
-        .child("")
         .child("profile")
+        .child(auth.currentUser?.uid!!)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +48,7 @@ class AddImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        changeImg.setOnClickListener {
+        addImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.type ="image/*"
             startActivityForResult(Intent.createChooser(intent, "Select Image"),
@@ -62,7 +63,7 @@ class AddImageFragment : Fragment() {
         if (requestCode == EditProfileActivity.REQUEST_CODE_PICK_IMAGE && data != null) {
             filePath = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, filePath)
-            changeImg.setImageBitmap(bitmap)
+            addImage.setImageBitmap(bitmap)
             uploadImage()
         } else {
             super.onActivityResult(requestCode, resultCode, data)

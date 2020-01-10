@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SlideFirstLogin.SlideActivity"></activity>
-        <activity android:name=".SlideFirstLogin.AddUsernameFragment" />
+        <activity android:name="com.viaann.chatin.fragment.SlideFirstLogin.SlideActivity"></activity>
+        <activity android:name="com.viaann.chatin.fragment.SlideFirstLogin.AddUsernameFragment" />
         <activity android:name=".activity.OldPasswordActivity" />
         <activity android:name=".activity.ChangeActivity.ChangeEmailActivity" />
         <activity

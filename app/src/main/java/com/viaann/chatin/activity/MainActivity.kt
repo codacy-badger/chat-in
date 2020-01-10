@@ -3,8 +3,6 @@ package com.viaann.chatin.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -13,11 +11,10 @@ import com.google.firebase.database.ValueEventListener
 import com.viaann.chatin.fragment.ContactFragment
 import com.viaann.chatin.fragment.MessageFragment
 import com.viaann.chatin.R
-import com.viaann.chatin.SlideFirstLogin.SlideActivity
 import com.viaann.chatin.fragment.SettingFragment
+import com.viaann.chatin.fragment.SlideFirstLogin.SlideActivity
 import com.viaann.chatin.model.User
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
@@ -36,11 +33,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         } else if (auth.currentUser != null) {
-
             if (!auth.currentUser!!.isEmailVerified) {
-
+                val intent = Intent(this, SlideActivity::class.java)
+                startActivity(intent)
             } else {
-                return
+
             }
         }
 
@@ -52,11 +49,17 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 val getIdAccount = dataSnapshot.child("idAccount").getValue(User::class.java)
-                if (dataSnapshot.hasChild(uid)) {
+                if (dataSnapshot.hasChild("/profile/$uid/")) {
                     return
-                } else if  (!dataSnapshot.hasChild(uid) && auth.currentUser != null)  {
+                } else if  (!dataSnapshot.hasChild("/profile/$uid/") && auth.currentUser != null)  {
                     // add new child field and value in real time database
-
+                    val user = HashMap<String, String>()
+                    user.put("email", auth.currentUser?.email!!)
+                    user.put("idAccount", "a")
+                    user.put("imageUrl", "")
+                    user.put("status", "")
+                    user.put("username", "")
+                    myRef.child("profile").child(auth.currentUser?.uid!!).setValue(user)
                 } else {
                     return
                 }

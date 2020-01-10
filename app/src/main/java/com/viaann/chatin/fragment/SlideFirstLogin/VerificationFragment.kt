@@ -1,7 +1,8 @@
-package com.viaann.chatin.SlideFirstLogin
+package com.viaann.chatin.fragment.SlideFirstLogin
 
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 
 import com.viaann.chatin.R
+import com.viaann.chatin.activity.LoginActivity
+import com.viaann.chatin.activity.MainActivity
 import kotlinx.android.synthetic.main.fragment_verification.*
 
 /**
@@ -33,9 +36,16 @@ class VerificationFragment : Fragment() {
             FirebaseAuth.getInstance().currentUser?.sendEmailVerification()
 
             val dialog = AlertDialog.Builder(context, R.style.MyDialogTheme)
-                dialog.setMessage("Please check your email")
-                dialog.setPositiveButton("OK") { dialog, which -> }
-                dialog.show()
+            val intent = Intent(context, LoginActivity::class.java)
+
+            dialog.setMessage("Please check your email, and Login again")
+            dialog.setPositiveButton("OK") { dialog, which ->
+                FirebaseAuth.getInstance().signOut()
+                startActivity(intent)
+            }
+            dialog.show()
+
+
         }
     }
 }

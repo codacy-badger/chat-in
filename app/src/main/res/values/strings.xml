@@ -48,4 +48,5 @@
     <string name="enter_your_account_id">enter your account id</string>
     <string name="enter_your_username">enter your username</string>
     <string name="enter_your_status">enter your status</string>
+    <string name="add_contact">Add</string>
 </resources>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SlideFirstLogin.AddUsernameFragment">
+    tools:context=".fragment.SlideFirstLogin.AddUsernameFragment">
 
     <TextView
         android:id="@+id/textView4"
@@ -42,6 +42,7 @@
         android:background="@drawable/bg_slide"
         android:ems="10"
         android:hint="@string/enter_your_username"
+        android:textColor="@android:color/white"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

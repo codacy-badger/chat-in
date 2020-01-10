@@ -18,10 +18,8 @@ import kotlinx.android.synthetic.main.activity_register.editTextPassword
 
 class RegisterActivity : AppCompatActivity() {
 
-
-    private val database = FirebaseDatabase.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private val myRef = database.getReference("users")
+    private val database = FirebaseDatabase.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +28,6 @@ class RegisterActivity : AppCompatActivity() {
         var email = findViewById<EditText>(R.id.editTextEmail)
         var password = findViewById<EditText>(R.id.editTextPassword)
         var confirmPassword = findViewById<EditText>(R.id.editTextConfirmPassword)
-        var idAccount = findViewById<EditText>(R.id.editTextIdAccount)
 
 
         buttonSignup.setOnClickListener {
@@ -41,26 +38,17 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val alert = AlertDialog.Builder(this, R.style.MyDialogTheme)
-                            val user = HashMap<String, String>()
+
 
                             alert.setMessage("Register Success")
                             alert.setPositiveButton("OK"){alert, which ->
                             }
                             alert.show()
 
-                            user.put("email", email.text.toString())
-                            user.put("idAccount", idAccount.text.toString())
-                            user.put("imageUrl", "")
-                            user.put("status", "")
-                            user.put("username", "")
-                            myRef.child(idAccount.text.toString()).child("profile").setValue(user)
-
-
                             // make all edit text is null after the register is success
                             email.text.clear()
                             password.text.clear()
                             confirmPassword.text.clear()
-                            idAccount.text.clear()
                         } else {
                             Log.d("RegisterActivity", it.exception.toString())
                             val alert = AlertDialog.Builder(this, R.style.MyDialogTheme)

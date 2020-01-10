@@ -37,14 +37,19 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private var firebaseStorage = FirebaseStorage.getInstance()
+
     private var storageRefrence = firebaseStorage.reference
+
     private var filePath: Uri? = null
+
     private val auth = FirebaseAuth.getInstance()
-    private val user = User()
+
     private val  getChild = FirebaseDatabase.getInstance()
         .getReference("users")
-        .child(user.idAccount!!) // error nih bangsatt !!
         .child("profile")
+        .child(auth.currentUser?.uid!!)
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,9 +93,6 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
         }
-
-
-
         getChild.addListenerForSingleValueEvent(postListener)
 
 
@@ -153,15 +155,15 @@ class EditProfileActivity : AppCompatActivity() {
             }).addOnCompleteListener {
                 if (it.isSuccessful) {
                     val downloadUrl = it.result
-                    //addUploadRecordToDb(downloadUrl.toString())
+                    addUploadRecordToDb(downloadUrl.toString())
                 }
             }
         }
     }
 
-//    private fun addUploadRecordToDb(uri: String) {
-//        getChild.child("imageUrl").setValue(uri)
-//    }
+    private fun addUploadRecordToDb(uri: String) {
+        getChild.child("imageUrl").setValue(uri)
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

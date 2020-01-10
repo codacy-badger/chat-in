@@ -22,8 +22,8 @@ class ChangeEmailActivity : AppCompatActivity() {
 
     private val getChild = FirebaseDatabase.getInstance()
         .getReference("usersProfile")
-        .child(FirebaseAuth.getInstance().currentUser!!.uid)
         .child("profile")
+        .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
     val user = FirebaseAuth.getInstance().currentUser
 

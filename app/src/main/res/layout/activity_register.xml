@@ -76,29 +76,11 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         android:autofillHints="@string/password"/>
 
-    <EditText
-        android:id="@+id/editTextIdAccount"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/id_account"
-        android:textColor="#D0D3D4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword"
-        android:autofillHints="@string/password"/>
-
     <Button
         android:id="@+id/buttonSignup"
         android:layout_width="94dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/button_bg"
         android:text="@string/sign_up"
         android:textAllCaps="false"
@@ -106,7 +88,7 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextIdAccount" />
+        app:layout_constraintTop_toBottomOf="@id/editTextConfirmPassword" />
 
     <TextView
         android:id="@+id/tvSignin"

@@ -3,7 +3,7 @@ package com.viaann.chatin.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.viaann.chatin.SlideFirstLogin.*
+import com.viaann.chatin.fragment.SlideFirstLogin.*
 
 class ViewPagerAdapter (fm : FragmentManager): FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
@@ -17,6 +17,9 @@ class ViewPagerAdapter (fm : FragmentManager): FragmentPagerAdapter(fm) {
             2 -> {
                 AddImageFragment()
             }
+            3 -> {
+                AddIdFragment()
+            }
             else -> {
                 VerificationFragment()
             }
@@ -24,6 +27,6 @@ class ViewPagerAdapter (fm : FragmentManager): FragmentPagerAdapter(fm) {
     }
 
     override fun getCount(): Int {
-        return 4
+        return 5
     }
 }

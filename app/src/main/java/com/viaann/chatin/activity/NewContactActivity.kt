@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -17,11 +18,15 @@ import kotlinx.android.synthetic.main.activity_new_contact.*
 
 class NewContactActivity : AppCompatActivity() {
 
-
+    private val auth = FirebaseAuth.getInstance()
+    private val database = FirebaseDatabase.getInstance()
+    private val uid = "${auth.currentUser?.uid}"
+    private val myRef = database.getReference("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_contact)
+
 
         supportActionBar?.title = "Add Contact"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -48,7 +53,8 @@ class NewContactActivity : AppCompatActivity() {
                             val getStatus = i.child("status").getValue(String::class.java)
                             val getUsername = i.child("username").getValue(String::class.java)
                             val getImageUrl = i.child("imageUrl").getValue(String::class.java)
-                            val getIdAccount = i.child("idAccoun").getValue(String::class.java)
+                            val getIdAccount = i.child("idAccount").getValue(String::class.java)
+
 
                             if (currentIdAccount == getIdAccount) {
                                 btnAddContact.invisible()
@@ -64,7 +70,16 @@ class NewContactActivity : AppCompatActivity() {
                             }
 
                             btnAddContact.setOnClickListener {
+                                val contact = HashMap<String, String>()
+                                contact.put("idAccount", getIdAccount.toString())
+                                contact.put("imageUrl", getImageUrl.toString())
+                                contact.put("status", getStatus.toString())
+                                contact.put("username", getUsername.toString())
 
+                                myRef.child("contact")
+                                    .child(uid)
+                                    .child(getIdAccount.toString())
+                                    .setValue(contact)
                             }
                         }
                     }

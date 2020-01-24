@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Parcelize
-data class Chat (val userId: String?,
-            var username: String,
-            val time: String,
-            var chat: String): Parcelable
+data class Message (
+    val imageUrl: String? = "",
+    val username: String? = "",
+    val message: String? = ""): Parcelable

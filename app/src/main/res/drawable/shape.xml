@@ -3,7 +3,7 @@
     android:shape="rectangle"   >
 
     <solid
-        android:color="@color/bgColor" >
+        android:color="#3B3B3B" >
     </solid>
 
     <padding

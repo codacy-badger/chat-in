@@ -85,13 +85,11 @@ class EditProfileActivity : AppCompatActivity() {
                 tvEditStatus.text = getStatus
                 tvChangeId.text = getId
 
-
                 Glide.with(applicationContext)
                     .load(getImage)
                     .fitCenter()
                     .into(changeImg)
             }
-
         }
         getChild.addListenerForSingleValueEvent(postListener)
 

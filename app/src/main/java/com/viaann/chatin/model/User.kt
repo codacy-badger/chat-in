@@ -20,6 +20,4 @@ data class User(
     var imageUrl: String? = "",
 
     @SerializedName("getEmail")
-    var email: String? = ""): Parcelable {
-
-}
+    var email: String? = ""): Parcelable

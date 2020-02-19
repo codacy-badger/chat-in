@@ -36,7 +36,6 @@ class NewMessageAdapter (private val contactList: List<Contact>, private val con
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         holder.bind(contactList[position])
 
-
         holder.itemView.setOnClickListener{
             val intent = Intent(context, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
